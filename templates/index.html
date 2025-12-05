@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymisation de Données</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 Anonymisation de Données</h1>
+            <p>Protégez vos données sensibles en toute simplicité</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('anonymize')">Anonymiser</button>
+            <button class="nav-tab" onclick="showTab('help')">Aide</button>
+        </div>
+        
+        <div id="anonymize-tab" class="tab-content active">
+            <!-- Étape 1: Nombre de fichiers -->
+            <div id="step1" class="step active">
+                <h2>Étape 1: Nombre de fichiers</h2>
+                <div class="form-group">
+                    <label for="fileCount">Combien de fichiers souhaitez-vous anonymiser ?</label>
+                    <input type="number" id="fileCount" min="1" max="10" value="2">
+                </div>
+                <button class="btn btn-primary" onclick="generateFileInputs()">Suivant</button>
+            </div>
+            
+            <!-- Étape 2: Upload des fichiers -->
+            <div id="step2" class="step">
+                <h2>Étape 2: Téléversement des fichiers</h2>
+                <div id="fileInputs"></div>
+                <button class="btn btn-secondary" onclick="showStep(1)">Retour</button>
+                <button class="btn btn-primary" onclick="uploadFiles()">Analyser</button>
+            </div>
+            
+            <!-- Étape 3: Sélection des colonnes -->
+            <div id="step3" class="step">
+                <h2>Étape 3: Sélection des colonnes à anonymiser</h2>
+                <div id="columnSelectors"></div>
+                <div class="form-group" style="margin-top: 30px;">
+                    <label for="mergeColumn">Colonne pour la jointure</label>
+                    <select id="mergeColumn"></select>
+                </div>
+                <button class="btn btn-secondary" onclick="showStep(2)">Retour</button>
+                <button class="btn btn-primary" onclick="processAnonymization()">Anonymiser</button>
+            </div>
+            
+            <!-- Étape 4: Résultats -->
+            <div id="step4" class="step">
+                <h2>Résultats</h2>
+                <div id="results"></div>
+                <button class="btn btn-primary" onclick="location.reload()">Nouvelle anonymisation</button>
+            </div>
+        </div>
+        
+        <div id="help-tab" class="tab-content">
+            <div class="help-content">
+                <h2>📖 Guide d'utilisation</h2>
+                
+                <h3>Qu'est-ce que l'anonymisation ?</h3>
+                <p>L'anonymisation est le processus de transformation des données sensibles en données non identifiables. Cette application utilise un algorithme de hachage (SHA-256) pour remplacer les valeurs sensibles par des identifiants uniques et irréversibles.</p>
+                
+                <h3>Comment utiliser l'application ?</h3>
+                <ol>
+                    <li><strong>Indiquez le nombre de fichiers</strong> que vous souhaitez anonymiser (entre 1 et 10)</li>
+                    <li><strong>Téléversez vos fichiers</strong> au format CSV, XLS ou XLSX</li>
+                    <li><strong>Sélectionnez les colonnes</strong> contenant des données sensibles pour chaque fichier</li>
+                    <li><strong>Choisissez la colonne de jointure</strong> commune à tous vos fichiers</li>
+                    <li><strong>Lancez l'anonymisation</strong> et visualisez les résultats</li>
+                    <li><strong>Téléchargez</strong> vos fichiers anonymisés et le fichier de jointure</li>
+                </ol>
+                
+                <h3>Formats de fichiers supportés</h3>
+                <ul>
+                    <li>CSV (.csv)</li>
+                    <li>Excel (.xlsx, .xls)</li>
+                </ul>
+                
+                <h3>Conseils de sécurité</h3>
+                <ul>
+                    <li>Vérifiez toujours le résultat avant utilisation</li>
+                    <li>Conservez une sauvegarde de vos données originales</li>
+                    <li>L'anonymisation est irréversible</li>
+                    <li>Assurez-vous que tous vos fichiers ont au moins une colonne commune pour la jointure</li>
+                </ul>
+                
+                <h3>Limitations</h3>
+                <ul>
+                    <li>Taille maximale par fichier : 16 MB</li>
+                    <li>Nombre maximal de fichiers : 10</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
