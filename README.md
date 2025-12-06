@@ -63,7 +63,7 @@ data-anonymizer/
 │   └── js/
 │       └── main.js
 ├── uploads/               # Dossier de téléversement
-├── tests/                 # Tests unitaires
+├── test.py                # cree deux fichiers xls dans mock
 └── docs/                  # Documentation
 
 ```
@@ -82,11 +82,6 @@ data-anonymizer/
 - **Data Processing**: Pandas
 - **File Handling**: openpyxl
 
-## 📝 Licence
-
-MIT License
-
 ## 👨‍💻 Auteur
-
-Créé avec ❤️ pour l'anonymisation de données
+Mani-X
 # data_anonymiser
